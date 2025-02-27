@@ -266,7 +266,7 @@ elif [ "${ADJUSTED_ID}" = "alpine" ]; then
     check_packages asciidoc curl-dev expat-dev g++ gcc openssl-dev pcre2-dev perl-dev perl-error python3-dev tcl tk xmlto
 
 elif [ "${ADJUSTED_ID}" = "rhel" ]; then
-    check_packages gcc libcurl-devel expat-devel gettext-devel openssl-devel perl-devel zlib-devel cmake pcre2-devel tar gzip ca-certificates
+    check_packages gcc libcurl-devel expat-devel gettext-devel openssl-devel perl-devel zlib-devel cmake pcre2-devel tar gzip ca-certificates diffutils
     if ! type curl > /dev/null 2>&1; then
         check_packages curl
     fi
