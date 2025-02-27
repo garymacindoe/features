@@ -271,7 +271,7 @@ elif [ "${ADJUSTED_ID}" = "rhel" ]; then
         check_packages curl
     fi
     if [ $ID = "mariner" ]; then
-        check_packages glibc-devel kernel-headers binutils
+        check_packages glibc-devel kernel-headers binutils awk
     fi
 
 else
