@@ -12,7 +12,7 @@ INSTALL_TOOLKIT=${INSTALLTOOLKIT}
 CUDA_VERSION=${CUDAVERSION}
 CUDNN_VERSION=${CUDNNVERSION}
 
-. /etc/os-release 
+. /etc/os-release
 
 if [ "$(id -u)" -ne 0 ]; then
     echo -e 'Script must be run as root. Use sudo, su, or add "USER root" to your Dockerfile before running this script.'
@@ -35,10 +35,10 @@ check_packages() {
     fi
 }
 
-if [ $VERSION_CODENAME = "bookworm" ] || [ $VERSION_CODENAME = "jammy" ] && [ $CUDA_VERSION \< 11.7 ]; then  
+if [ $VERSION_CODENAME = "bookworm" ] || [ $VERSION_CODENAME = "jammy" ] && [ $CUDA_VERSION \< 11.7 ]; then
     echo "(!) Unsupported distribution version '${VERSION_CODENAME}' for CUDA < 11.7"
     exit 1
-fi  
+fi
 
 export DEBIAN_FRONTEND=noninteractive
 
@@ -74,7 +74,7 @@ if [ "$CUDNN_VERSION" = "automatic" ]; then
     if [[ "$CUDA_VERSION" < "12.3" ]]; then
         CUDNN_VERSION=$(apt-cache policy libcudnn8 | grep "$CUDA_VERSION" | grep -Eo '^[^-1+]*' | sort -V | tail -n1 | xargs)
     else
-        CUDNN_VERSION=$(apt-cache policy libcudnn9-cuda-$major_cuda_version | grep "Candidate" | awk '{print $2}' | grep -Eo '^[^-1+]*')
+        CUDNN_VERSION=$(apt-cache policy libcudnn9-cuda-$major_cuda_version | grep "Candidate" | awk '{print $2}' | grep -Eo '^[[:digit:]\.?]+')
     fi
 fi
 major_cudnn_version=$(echo "${CUDNN_VERSION}" | cut -d '.' -f 1)
